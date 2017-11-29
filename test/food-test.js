@@ -1,7 +1,7 @@
 var chai = require('chai');
 var assert = chai.assert;
 
-var Food = require('../lib/food');
+var Food = require('../lib/models/food');
 
 var assert = chai.assert
 describe('Food', function() {
