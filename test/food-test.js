@@ -10,7 +10,15 @@ describe('Food', function() {
       var iceCream = new Food("Ice Cream Cone", 135);
       assert.typeOf(iceCream, 'object');
       assert.equal(iceCream.name, "Ice Cream Cone")
-      assert.equal(iceCream.calories, "135")
+      assert.equal(iceCream.calories, 135)
+    });
+  });
+  context('can edit a food', function() {
+    it('should edit some food', function(){
+      var iceCream = new Food("Ice Cream Cone", 135);
+      iceCream.edit("Strawberry", 43)
+      assert.equal(iceCream.name, "Strawberry")
+      assert.equal(iceCream.calories, 43)
     });
   });  
 });
