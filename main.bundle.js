@@ -47,8 +47,7 @@
 	'use strict';
 
 	var Food = __webpack_require__(1);
-
-	var someFood = new Food();
+	var Ajax = __webpack_require__(2);
 
 /***/ }),
 /* 1 */
@@ -56,16 +55,48 @@
 
 	"use strict";
 
-	function Food(food, calories) {
+	function Food(name, calories) {
 	  this.name = name;
 	  this.calories = calories;
 	}
 
-	Food.prototype.edit = function () {
-	  //Some cool storage stuff here
+	Food.prototype.edit = function (name, calories) {
+	  this.name = name;
+	  this.calories = calories;
 	};
 
 	module.exports = Food;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	var API = "http://localhost:3000";
+
+	$(document).ready(function () {
+
+	  var handleError = function handleError() {
+	    alert("Something went wrong, please try again");
+	  };
+
+	  $.ajax({
+	    url: API + '/api/v1/foods',
+	    method: 'GET'
+	  }).then(function (data) {
+	    for (var i = 0; data.length; i++) {
+	      $('.food-table').append("<tr><tb>" + data.name + "</tb><tb>" + data.calories + "</tb></tr>");
+	    }
+	  });
+	  // .done(function(data) {
+	  //   for(var i = 0; data.length; i ++){
+	  //     $('.food-table').append(`<tr><tb>${data.name}</tb><tb>${data.calories}</tb></tr>`);
+	  //   }
+	  // }).fail(function(){
+	  //   handleError();
+	  // });
+	});
 
 /***/ })
 /******/ ]);
