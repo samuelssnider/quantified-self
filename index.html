@@ -1,36 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="main.bundle.js"></script>
   <meta charset="utf-8">
   <title>Quantified Self - Manage Foods</title>
 </head>
 <body>
-  <h1>Manage Foods</h1>
-  
-  <ui>
-    <p>Name</p>
-    <form id="food_creator" name="food_creator">
-    <input name='food-name'>
-    <p>Calories</p>
-    <input name='food-calories'> <br />
-    <input type='submit' value="Add Food!" /></form>
-  </ui>
-  
-  <ui>
-    <p>Filter by Name</p>
-    <form id="filter-name" name="filter-name">
-    <input name='filter'>
-  </ui>
-  
-  <table style="width: 30%">
-    <tr>
-      <th>Name</th>
-      <th>Calories</th>
-    </tr>
+  <div>
       
+    <h1>Manage Foods</h1>
     
-  </table>
+    <ui>
+      <p>Name</p>
+      <form id="food_creator" name="food_creator">
+      <input name='food-name'>
+      <p>Calories</p>
+      <input name='food-calories'> <br />
+      <input type='submit' value="Add Food!" /></form>
+    </ui>
+    
+    <ui>
+      <p>Filter by Name</p>
+      <form id="filter-name" name="filter-name">
+      <input name='filter'>
+    </ui>
+    
+    <table class='food-table'style="width: 30%">
+      <tr>
+        <th>Name</th>
+        <th>Calories</th>
+      </tr>
+    </table>
+  </div>
   
-  <script src="main.bundle.js"></script>
 </body>
 </html>
+
