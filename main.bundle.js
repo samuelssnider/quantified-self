@@ -82,9 +82,24 @@
 	    method: 'GET'
 	  }).then(function (data) {
 	    for (var i = 0; i < data.length; i++) {
-	      $("table").append('<tr><tb>' + data[i]['name'] + '</tb><tb>' + data[i]['calories'] + '</tb></tr>');
+	      $("table").append('<tr><td class="' + data['name'] + '">' + data[i]['name'] + '</td><td>' + data[i]['calories'] + '</td><td>Edit</td></tr>');
 	    }
 	  });
+
+	  var createFood = function createFood() {
+	    var newFoodName = $("#food_creator input[name='food-name']").val();
+	    var newFoodCals = $("#food_creator input[name='food-calories']").val();
+	    return $.ajax({
+	      url: API + '/api/v1/foods',
+	      method: 'POST',
+	      data: { food: { name: newFoodName, calories: newFoodCals } }
+	    }).then(function (data) {
+	      $("table").prepend('<tr><td class="' + data['name'] + '">' + data['name'] + '</td><td>' + data['calories']);
+	    });
+	  };
+
+	  $('#food_creator input[type="submit"]').on('click', createFood);
+	  $('#food_creator input[type="submit"]').on('click', createFood);
 	});
 
 /***/ })
