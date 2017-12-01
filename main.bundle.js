@@ -83,7 +83,7 @@
 	    method: 'GET'
 	  }).then(function (data) {
 	    for (var i = 0; i < data.length; i++) {
-	      $("table").append('<tr><td class="' + data[i]['name'] + '">' + data[i]['name'] + '</td><td>' + data[i]['calories']);
+	      $("table").append('<tr><td class="food-all ' + data[i]['name'].replace(/\s/g, '') + '">' + data[i]['name'] + '</td><td>' + data[i]['calories']);
 	    }
 	  });
 
@@ -95,12 +95,26 @@
 	      method: 'POST',
 	      data: { food: { name: newFoodName, calories: newFoodCals } }
 	    }).then(function (data) {
-	      $(".top").after('<tr><td class="' + data['name'] + '">' + data['name'] + '</td><td>' + data['calories']);
+	      $(".top").after('<tr><td class="food-all ' + data['name'].replace(/\s/g, '') + '">' + data['name'] + '</td><td>' + data['calories']);
+	    });
+	  };
+
+	  var editFood = function editFood() {
+	    debugger;
+	    var newFoodName = $("#food_creator input[name='food-name']").val();
+	    var newFoodCals = $("#food_creator input[name='food-calories']").val();
+	    return $.ajax({
+	      url: API + '/api/v1/foods',
+	      method: 'POST',
+	      data: { food: { name: newFoodName, calories: newFoodCals } }
+	    }).then(function (data) {
+	      $(".top").after('<tr><td class="food-all ' + data['name'].replace(/\s/g, '') + '">' + data['name'] + '</td><td>' + data['calories']);
 	    });
 	  };
 
 	  $('#food_creator input[type="submit"]').on('click', createFood);
-	  // $('#food_creator input[type="submit"]').on('click', createFood);
+	  // $('.food-all').on('click', findEditedFood)
+	  $('.food-all').on('click', { name: this }, editFood);
 	});
 
 /***/ }),
@@ -119,8 +133,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!../../node_modules/css-loader/index.js!./myCss.css", function() {
-				var newContent = require("!!../../node_modules/css-loader/index.js!./myCss.css");
+			module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./myCss.scss", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./myCss.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -138,7 +152,7 @@
 
 
 	// module
-	exports.push([module.id, "header, th, td {\n  border: black, solid, 1px;\n}", ""]);
+	exports.push([module.id, "table, th, td {\n  border: 1px solid black; }\n", ""]);
 
 	// exports
 
