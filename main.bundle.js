@@ -75,7 +75,8 @@
 	'use strict';
 
 	var API = "http://localhost:3000";
-
+	var deleteImageSrc = 'https://assets.publishing.service.gov.uk/media/55b9f41b40f0b6151f000019/sign-giving-order-no-entry-vehicular-traffic.jpg';
+	var updateImageSrc = 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Breezeicons-emblems-8-emblem-added.svg/512px-Breezeicons-emblems-8-emblem-added.svg.png';
 	$(document).ready(function () {
 
 	  $.ajax({
@@ -83,7 +84,13 @@
 	    method: 'GET'
 	  }).then(function (data) {
 	    for (var i = 0; i < data.length; i++) {
-	      $("table").append('<tr><td class="' + data[i]['name'] + '">' + data[i]['name'] + '</td><td>' + data[i]['calories']);
+	      var tableRow = document.createElement('tr');
+	      $(tableRow).addClass();
+	      $(tableRow).addClass('food-all');
+	      $(tableRow).append('<td class="food ' + data[i]['id'] + '">' + data[i]['name'] + '</td>');
+	      $(tableRow).append('<td>' + data[i]['calories'] + '</td>');
+	      $(tableRow).append('<td><img class="del-image" src="' + deleteImageSrc + '"/></td></tr>');
+	      $('table').append(tableRow);
 	    }
 	  });
 
@@ -95,12 +102,71 @@
 	      method: 'POST',
 	      data: { food: { name: newFoodName, calories: newFoodCals } }
 	    }).then(function (data) {
-	      $(".top").after('<tr><td class="' + data['name'] + '">' + data['name'] + '</td><td>' + data['calories']);
+	      $(".top").after('<tr><td class="food-all ' + data['name'].replace(/\s/g, '') + '">' + data['name'] + '</td><td>' + data['calories'] + '</td></tr>');
 	    });
 	  };
 
+	  var editFoodInit = function editFoodInit() {
+	    var editID = "update ";
+	    editID += this.classList[1].toString();
+	    var foodDesc = document.createElement('TD');
+	    var calDesc = document.createElement('TD');
+	    var foodImage = document.createElement('TD');
+	    var nameForm = document.createElement('FORM');
+	    var calForm = document.createElement('FORM');
+	    var foodName = document.createElement('INPUT');
+	    var foodCals = document.createElement('INPUT');
+	    var foodSubmit = document.createElement('BUTTON');
+	    var foodImg = document.createElement('IMG');
+	    $(foodImage).addClass(editID.toString());
+	    foodImg.src = updateImageSrc;
+	    foodImg.style = "width:20px; margin-left:5px;margin-right:5px";
+	    foodImage.appendChild(foodImg);
+	    nameForm.appendChild(foodName);
+	    foodName.placeholder = this.innerText;
+	    foodName.name = 'food-name';
+	    calForm.appendChild(foodCals);
+	    foodCals.name = 'cals-tot';
+	    foodCals.placeholder = this.parentNode.children[1].innerText;
+	    foodDesc.appendChild(nameForm);
+	    calDesc.appendChild(calForm);
+	    this.parentElement.replaceChild(foodDesc, this);
+	    foodDesc.parentElement.replaceChild(calDesc, foodDesc.parentElement.children[1]);
+	    foodDesc.parentElement.replaceChild(foodImage, foodDesc.parentElement.children[2]);
+	  };
+	  var editTheFood = function editTheFood() {
+	    debugger;
+	    var editFoodId = this.classList[1];
+	    var editName = $("td input[name='food-name']");
+	    var editCals = $("td input[name='cals-tot']");
+	    return $.ajax({
+	      url: API + '/api/v1/foods/' + editFoodId,
+	      method: 'PUT',
+	      data: { food: { name: editName, calories: editCals } }
+	    }).then(function (data) {
+	      console.log("why is this taking so long?");
+	    });
+	  };
+
+	  // var editTheFood = function() {
+	  //   var editFoodId = this.classList[1];
+	  //   var editName = $("td input[name='food-name']");
+	  //   var editCals = $("td input[name='cals-tot']");
+	  //   return $.ajax({
+	  //     url: API + '/api/v1/foods/' + editFoodId,
+	  //     method: 'PUT',
+	  //     data: { food: {name: editName, calories = editCals}},
+	  //   }).done(function(data) {
+	  //     $('#latest-domains').append('<p class="domain">Your Domain with id '+ updateDomainId +' has been updated</p>');
+	  //   }).fail(function() {
+	  //     handleError();
+	  //   })
+	  // }
+
 	  $('#food_creator input[type="submit"]').on('click', createFood);
-	  // $('#food_creator input[type="submit"]').on('click', createFood);
+	  // $('.food-all').on('click', findEditedFood)
+	  $('table').on('click', '.food', editFoodInit);
+	  $('table').on('click', '.update', editTheFood);
 	});
 
 /***/ }),
@@ -119,8 +185,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!../../node_modules/css-loader/index.js!./myCss.css", function() {
-				var newContent = require("!!../../node_modules/css-loader/index.js!./myCss.css");
+			module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./myCss.scss", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./myCss.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -138,7 +204,7 @@
 
 
 	// module
-	exports.push([module.id, "header, th, td {\n  border: black, solid, 1px;\n}", ""]);
+	exports.push([module.id, "table, th, td {\n  border: 1px solid black; }\n\n.del-image {\n  width: 20px;\n  margin-left: 5px;\n  margin-right: 5px; }\n", ""]);
 
 	// exports
 
