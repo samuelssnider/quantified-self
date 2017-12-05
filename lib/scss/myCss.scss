@@ -23,11 +23,22 @@ table, th, td {
 
 .del-image {
   width:20px;
-  margin-left:5px;
+  text-align: center;
+  margin-left:20%;
+  margin-right:20%;
 }
 
 .update-image {
   width:20px;
-  margin-left: 5px;
-  margin-right:5px;
+  text-align: center;
+  margin-left:20%;
+  margin-right:12px;
+}
+.blue-button{
+  background-color: #99ccff;
+  float: right;
+}
+
+.twenty-eight{
+  width: 20em;
 }

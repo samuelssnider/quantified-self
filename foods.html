@@ -7,30 +7,31 @@
   <title>Quantified Self - Manage Foods</title>
 </head>
 <body>
-  <div>
+  <div class='container'>
       
-    <h1>Manage Foods</h1>
-    
-    <ui>
-      <p>Name</p>
-      <form id="food_creator" name="food_creator">
-      <input name='food-name'>
-      <p>Calories</p>
-      <input name='food-calories'> <br />
-      <input type='submit' value="Add Food!" /></form>
-    </ui>
-    
-    <ui>
-      <p>Filter by Name</p>
-      <form id="filter-name" name="filter-name">
-      <input name='filter'></form>
-    </ui>
-    
-    <table id='food-table' style="width: 25%">
+    <div style="width: 25%">
+      <h1>Manage Foods</h1>
       
-    </table>
+      <ui>
+        <p>Name</p>
+        <form id="food_creator" name="food_creator">
+        <input name='food-name'>
+        <p>Calories</p>
+        <input name='food-calories'> <br />
+        <input class='blue-button'type='submit' value="Add Food!" /></form>
+      </ui>
+      
+      <ui>
+        <p>Filter by Name</p>
+        <form id="filter-name" name="filter-name">
+        <input name='filter'></form>
+      </ui>
+      <br />
+    </div>
+    <div>
+      <table id='food-table' style="width: 28%">
+      </table>  
+    </div>
   </div>
-  
 </body>
 </html>
-
