@@ -10,7 +10,7 @@ table, th, td {
 
 .wrapper {
   display: grid;
-  grid-template-columns: 30% 30% ;
+  grid-template-columns: 45% 45% ;
   grid-gap: 5px;
   color: #444;
 }
@@ -36,9 +36,9 @@ table, th, td {
 }
 .blue-button{
   background-color: #99ccff;
-  float: right;
 }
 
 .twenty-eight{
   width: 20em;
 }
+
