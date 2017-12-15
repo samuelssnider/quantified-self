@@ -88,7 +88,7 @@
 
 	var _meal_helpers = __webpack_require__(4);
 
-	var API = "https://dan-and-sam-api.herokuapp.com/api/v1/meals";
+	var API = "https://dan-and-sam-api.herokuapp.com";
 	var deleteImageSrc = 'https://assets.publishing.service.gov.uk/media/55b9f41b40f0b6151f000019/sign-giving-order-no-entry-vehicular-traffic.jpg';
 
 	var readFoodCreate = function readFoodCreate(foodId, foot) {
@@ -193,7 +193,7 @@
 
 	var deleteImageSrc = 'https://assets.publishing.service.gov.uk/media/55b9f41b40f0b6151f000019/sign-giving-order-no-entry-vehicular-traffic.jpg';
 	var updateImageSrc = 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Breezeicons-emblems-8-emblem-added.svg/512px-Breezeicons-emblems-8-emblem-added.svg.png';
-	var API = "https://dan-and-sam-api.herokuapp.com/api/v1/meals";
+	var API = "https://dan-and-sam-api.herokuapp.com";
 
 
 	function createTableHead() {
@@ -316,7 +316,7 @@
 	var _food_requests = __webpack_require__(2);
 
 	var deleteImageSrc = 'https://assets.publishing.service.gov.uk/media/55b9f41b40f0b6151f000019/sign-giving-order-no-entry-vehicular-traffic.jpg';
-	var API = "https://dan-and-sam-api.herokuapp.com/api/v1/meals";
+	var API = "https://dan-and-sam-api.herokuapp.com";
 
 	function appendFoodToMeal(meal) {
 	  $('#' + meal.name + '-table').append(meal.foods.forEach(function (food, index) {
@@ -550,7 +550,7 @@
 
 	var _meal_helpers = __webpack_require__(4);
 
-	var API = "https://dan-and-sam-api.herokuapp.com/api/v1/meals"; //wrap this whole thing in a class (for ref: http://backend.turing.io/module4/lessons/intro-to-oojs)
+	var API = "https://dan-and-sam-api.herokuapp.com"; //wrap this whole thing in a class (for ref: http://backend.turing.io/module4/lessons/intro-to-oojs)
 	//create a new file and class that contains EventHandler, then call those things in here
 
 
@@ -572,7 +572,7 @@
 	$(document).ready(function () {
 
 	  //shows all foods in tables
-	  fetch('https://dan-and-sam-api.herokuapp.com/api/v1/meals/api/v1/meals').then(function (response) {
+	  fetch('https://dan-and-sam-api.herokuapp.com/api/v1/meals').then(function (response) {
 	    response.json().then(function (data) {
 	      for (var i = 0; i < data.length; i++) {
 	        (0, _meal_helpers.appendFoodToMeal)(data[i]);
