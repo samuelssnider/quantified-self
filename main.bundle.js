@@ -88,7 +88,7 @@
 
 	var _meal_helpers = __webpack_require__(4);
 
-	var API = "https://dan-and-sam-api.herokuapp.com";
+	var API = "http://localhost:3000";
 	var deleteImageSrc = 'https://assets.publishing.service.gov.uk/media/55b9f41b40f0b6151f000019/sign-giving-order-no-entry-vehicular-traffic.jpg';
 
 	var readFoodCreate = function readFoodCreate(foodId, foot) {
@@ -114,7 +114,7 @@
 	var deleteFood = function deleteFood(e) {
 	  e.preventDefault();
 	  var deleteId = parseInt(this.parentNode.firstChild.classList[1]);
-	  $.ajax({
+	  return $.ajax({
 	    url: API + '/api/v1/meals/',
 	    method: 'GET'
 	  }).then(function (data) {
@@ -146,6 +146,7 @@
 	  e.preventDefault();
 	  var newFoodName = $("#food_creator input[name='food-name']").val();
 	  var newFoodCals = $("#food_creator input[name='food-calories']").val();
+	  debugger;
 	  return $.ajax({
 	    url: API + '/api/v1/foods',
 	    method: 'POST',
@@ -156,6 +157,7 @@
 	  }).fail(function () {
 	    alert("You Must Enter a name AND calorie total for your food!");
 	  });
+	  debugger;
 	};
 
 	$(document).ready(function () {
@@ -193,7 +195,7 @@
 
 	var deleteImageSrc = 'https://assets.publishing.service.gov.uk/media/55b9f41b40f0b6151f000019/sign-giving-order-no-entry-vehicular-traffic.jpg';
 	var updateImageSrc = 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Breezeicons-emblems-8-emblem-added.svg/512px-Breezeicons-emblems-8-emblem-added.svg.png';
-	var API = "https://dan-and-sam-api.herokuapp.com";
+	var API = "http://localhost:3000";
 
 
 	function createTableHead() {
@@ -213,6 +215,7 @@
 	    data = [data];
 	    position = 0;
 	  }
+	  debugger;
 	  var tableRow = document.createElement('tr');
 	  $(tableRow).addClass('row');
 	  $(tableRow).append('<td class="food ' + data[position]['id'] + '">' + data[position]['name'] + '</td>');
@@ -316,7 +319,8 @@
 	var _food_requests = __webpack_require__(2);
 
 	var deleteImageSrc = 'https://assets.publishing.service.gov.uk/media/55b9f41b40f0b6151f000019/sign-giving-order-no-entry-vehicular-traffic.jpg';
-	var API = "https://dan-and-sam-api.herokuapp.com";
+	var API = "http://localhost:3000";
+
 
 	function appendFoodToMeal(meal) {
 	  $('#' + meal.name + '-table').append(meal.foods.forEach(function (food, index) {
@@ -464,7 +468,7 @@
 	  if (table.id.includes("Lunch")) {
 	    position = 2;
 	  }
-	  fetch('https://dan-and-sam-api.herokuapp.com/api/v1/meals').then(function (response) {
+	  fetch('http://localhost:3000/api/v1/meals').then(function (response) {
 	    response.json().then(function (data) {
 	      appendFoodToMeal(data[position]);
 	    });
@@ -517,6 +521,7 @@
 	};
 
 	function createMealFood(mealId, foodId, foot) {
+
 	  return $.ajax({
 	    url: API + '/api/v1/meals/' + mealId + '/foods/' + foodId,
 	    method: 'POST'
@@ -550,7 +555,7 @@
 
 	var _meal_helpers = __webpack_require__(4);
 
-	var API = "https://dan-and-sam-api.herokuapp.com"; //wrap this whole thing in a class (for ref: http://backend.turing.io/module4/lessons/intro-to-oojs)
+	var API = "http://localhost:3000"; //wrap this whole thing in a class (for ref: http://backend.turing.io/module4/lessons/intro-to-oojs)
 	//create a new file and class that contains EventHandler, then call those things in here
 
 
@@ -560,6 +565,7 @@
 	  var deleteFoodId = list[list.length - 1];
 	  var tableName = $(this).parents()[2].id;
 	  var targetElement = this.parentElement;
+	  debugger;
 	  return $.ajax({
 	    url: API + '/api/v1/meals/' + (0, _meal_helpers.mealId)(tableName) + '/foods/' + deleteFoodId,
 	    method: 'DELETE'
@@ -572,7 +578,7 @@
 	$(document).ready(function () {
 
 	  //shows all foods in tables
-	  fetch('https://dan-and-sam-api.herokuapp.com/api/v1/meals').then(function (response) {
+	  fetch('http://localhost:3000/api/v1/meals').then(function (response) {
 	    response.json().then(function (data) {
 	      for (var i = 0; i < data.length; i++) {
 	        (0, _meal_helpers.appendFoodToMeal)(data[i]);
